@@ -9,13 +9,14 @@
       class="demo-loginForm"
     >
       <el-form-item label="账号" prop="account">
-        <el-input v-model="loginForm.account" type="text" autocomplete="off" />
+        <el-input v-model="loginForm.account" type="text" autocomplete="off" placeholder="账号 Bethel" />
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input
           v-model="loginForm.password"
           type="password"
           autocomplete="off"
+          placeholder="密码 123456"
         />
       </el-form-item>
       <el-form-item>
