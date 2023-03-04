@@ -1,48 +1,48 @@
 name: vue3-ts自动打包并上传
 
 on:
-  push:
-    branches:
-      - master
+    push:
+        branches:
+            - master
 
 jobs:
-  build:
-    # runs-on 指定job任务运行所需要的虚拟机环境
-    runs-on: ubuntu-lastest
-    steps:
-      # 获取源码
-      - name: 迁出代码
-        # 使用action库 actions/checkout获取源码
-        uses: actions/checkout@master
+    build:
+        # runs-on 指定job任务运行所需要的虚拟机环境
+        runs-on: ubuntu-lastest
+        steps:
+            # 获取源码
+            - name: 迁出代码
+              # 使用action库 actions/checkout获取源码
+              uses: actions/checkout@master
 
-      # 安装nodejs
-      - name: 安装node.js
-        # 使用action库 actions/setup-node安装node
-        uses: actions/setup-node@v1
-        width:
-          node-version: 14.0.0
+            # 安装nodejs
+            - name: 安装node.js
+              # 使用action库 actions/setup-node安装node
+              uses: actions/setup-node@v1
+              width:
+                  node-version: 14.0.0
 
-      # 安装依赖
-      - name: 安装依赖
-        run: yarn install
+            # 安装依赖
+            - name: 安装依赖
+              run: yarn install
 
-      # 打包
-      - name: 打包
-        run: yarn run build
+            # 打包
+            - name: 打包
+              run: yarn run build
 
-      # 发布到阿里云
-      - name: 发布到阿里云
-        uses: easingthemes/ssh-deploy@v2.1.1
-        env: 
-          # 秘钥
-          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          # scp参数
-          ARGS: '-avzr --delete'
-          # 源目录
-          SOURCE: 'dist'
-          # 服务器ip
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          # 用户
-          REMOTE_USER: 'root'
-          # 目标地址
-          TARGET: '/www/wwwroot'
+            # 发布到阿里云
+            - name: 发布到阿里云
+              uses: easingthemes/ssh-deploy@v2.1.1
+              env: 
+                  # 秘钥
+                  SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+                  # scp参数
+                  ARGS: '-avzr --delete'
+                  # 源目录
+                  SOURCE: 'dist'
+                  # 服务器ip
+                  REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+                  # 用户
+                  REMOTE_USER: 'root'
+                  # 目标地址
+                  TARGET: '/www/wwwroot'
