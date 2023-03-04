@@ -32,7 +32,7 @@ jobs:
 
       # 发布到阿里云
       - name: 发布到阿里云
-        users: easingthemes/ssh-deploy@v2.1.1
+        uses: easingthemes/ssh-deploy@v2.1.1
         env: 
           # 秘钥
           SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
